@@ -1,0 +1,8 @@
+.env
+.venv/
+__pycache__/
+dev/
+*.py[cod]
+*.dump
+*.bson
+*.json
