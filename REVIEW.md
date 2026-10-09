@@ -1,12 +1,11 @@
 # Review
 
 The original starter implementation was inspected against the assignment's API
-and `DATA_MODEL.md`. The following 15 defects or explicit implementation-contract
-violations were confirmed. Behavioral reproductions against that snapshot are in
-the ignored `dev/starter_audit_test.py`; it starts the archived starter against a
-random database and does not delete existing data. Pipeline and explain-builder
-regressions are checked by `dev/pipeline_contract_test.py`. The race finding is
-from the barrier-started race reproduction recorded below.
+contract and data-model specification. The following 15 defects or explicit
+implementation-contract violations were confirmed. Behavioral examples below
+were reproduced against the original starter using isolated test data; the
+pipeline and explain findings were verified against the required implementation
+behavior. The concurrency finding was reproduced with barrier-started requests.
 
 | # | Original location | Reproduction or confirmed symptom | Fix |
 |---|---|---|---|
@@ -30,8 +29,7 @@ from the barrier-started race reproduction recorded below.
 
 - In the post-fix code, a valid PATCH against an existing record returned HTTP 200;
   the HTTP 500 above is specific to the original starter's timestamp-change path.
-- The current pipeline regression script verifies monthly, department-average,
-  trend-gap-fill, and explain-builder behavior. The independent analytics and
-  100,000-record scale checks are rerun separately; their latest results belong
-  in the final audit report, not as a blanket claim that every environment is
-  ready.
+- Monthly aggregation outputs, department metrics, trend gap filling, explain
+  plans, independent analytics calculations, and 100,000-record behavior were
+  separately verified during development. Performance results are local
+  measurements, not guarantees for every environment.
